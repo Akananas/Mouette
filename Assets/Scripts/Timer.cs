@@ -14,8 +14,21 @@ public class Timer
         m_CurrentTime += deltaTime;
         if(m_CurrentTime >= m_Time){
             m_EndTimer?.Invoke();
+            m_CurrentTime = m_Time;
             return true;
         }
         return false;
+    }
+
+    public bool IsActive(){
+        return m_CurrentTime < m_Time;
+    }
+
+    public void AddTime(float addedTime){
+        m_Time += addedTime; 
+    }
+
+    public float GetRemainingTime(){
+        return m_Time - m_CurrentTime;
     }
 }

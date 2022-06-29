@@ -24,7 +24,9 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    public void AddTimer(Action endTimer, float time){
-        m_Timers.Add(new Timer(endTimer, time));
+    public Timer AddTimer(Action endTimer, float time){
+        Timer newTimer = new Timer(endTimer, time);
+        m_Timers.Add(newTimer);
+        return newTimer;
     }
 }

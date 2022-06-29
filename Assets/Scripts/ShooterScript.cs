@@ -10,6 +10,7 @@ public class ShooterScript : MonoBehaviour
     [SerializeField]float m_BombRadius;
     [SerializeField]LayerMask m_HittableObjects;
     Action<Vector2> m_CurrentShoot;
+    Timer m_ReloadTimer;
     
     void Start(){
         m_CanShoot = true;
@@ -29,6 +30,14 @@ public class ShooterScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space)){
             m_UseBomb = true;
             m_CurrentShoot = BombShoot;
+            if(m_ReloadTimer != null && m_ReloadTimer.IsActive()){
+                m_ReloadTimer.AddTime(2.5f - m_ReloadTimer.GetRemainingTime());
+                Debug.Log("Already exist");
+            }
+            else{
+                m_CanShoot = false;
+                m_ReloadTimer = GameManager.Inst.AddTimer(Reload, 2.5f);
+            }
         }
     }
     
@@ -37,7 +46,7 @@ public class ShooterScript : MonoBehaviour
         foreach (var obj in _hitObjects){
             Debug.Log("Hit object");
         }
-        GameManager.Inst?.AddTimer(Reload, 0.5f);
+        m_ReloadTimer = GameManager.Inst?.AddTimer(Reload, 0.5f);
     }
 
     void BombShoot(Vector2 position){
@@ -51,7 +60,7 @@ public class ShooterScript : MonoBehaviour
                 Debug.Log("In bomb radius");
             }
         }
-        GameManager.Inst?.AddTimer(Reload, 0.5f);
+        m_ReloadTimer = GameManager.Inst?.AddTimer(Reload, 0.5f);
         m_CurrentShoot = BasicShoot;
     }
 
