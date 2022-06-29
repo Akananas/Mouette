@@ -10,6 +10,13 @@ public class MouetteScript : MonoBehaviour, IHitComp
 
     MouetteState mouetteState;
 
+    void Start(){
+        GameManager.Inst?.AddTimer(TimerTest, 1.0f, true, 0);
+    }
+    
+    void TimerTest(){
+        Debug.Log("Timer");
+    }
     public void Hit(){
     }
 }
