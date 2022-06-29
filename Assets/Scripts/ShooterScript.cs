@@ -18,8 +18,6 @@ public class ShooterScript : MonoBehaviour
             Debug.Log("Shoot");
             BasicShoot(_mousePosition);
         }
-        
-        m_CanShoot = true;
     }
     
     void BasicShoot(Vector2 position){
@@ -27,5 +25,10 @@ public class ShooterScript : MonoBehaviour
         foreach (var obj in _hitObjects){
             Debug.Log("Hit object");
         }
+        GameManager.Inst?.AddTimer(Reload, 0.5f);
+    }
+
+    void Reload(){
+        m_CanShoot = true;
     }
 }
