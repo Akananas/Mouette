@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject playingPanel;
     [SerializeField] private GameObject pausePanel;
 
+    [SerializeField] private Image cursor;
     [SerializeField] private Text scoreBoat;
 
     // Start is called before the first frame update
@@ -22,7 +23,11 @@ public class UIManager : MonoBehaviour
         MainMenu();
         // Jeu final - Appel du GameManager
     }
-
+        
+    private void Update()
+    {
+        cursor.rectTransform.position = Input.mousePosition;
+    }
 
     #region UIStates
     public void Play()
