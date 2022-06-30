@@ -52,4 +52,11 @@ public class Timer
     public float GetRemainingTime(){
         return m_Time - m_CurrentTime;
     }
+    
+    public void ForceStop(bool keepActive){
+        m_CurrentTime = m_Time;
+        if(!keepActive){
+            m_EndTimer -= m_EndTimer;
+        }
+    }
 }

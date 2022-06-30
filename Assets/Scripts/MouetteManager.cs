@@ -7,9 +7,17 @@ public class MouetteManager : MonoBehaviour
     HashSet<MouetteScript> m_Alive = new HashSet<MouetteScript>();
     [SerializeField]GameObject prefab;
     [SerializeField]Vector2 spawnRate;
+    public static MouetteManager Instance;
+    Timer m_SpawnTimer;
 
-    void Start(){
-        RandomSpawnTimer();
+    private void Awake()
+    {
+        if(Instance == null){
+            Instance = this;
+        }
+        else{
+            Destroy(this);
+        }
     }
 
     void SpawnMouette(){
@@ -29,7 +37,7 @@ public class MouetteManager : MonoBehaviour
 
     void RandomSpawnTimer(){
         float time = Random.Range(spawnRate.x, spawnRate.y);
-        GameManager.Inst.AddTimer(SpawnMouette, time);
+        m_SpawnTimer = GameManager.Inst.AddTimer(SpawnMouette, time);
     }
 
     Vector3 GetRandomSpawnPoint(){
@@ -44,8 +52,11 @@ public class MouetteManager : MonoBehaviour
     }
 
     public void Reset(){
+        m_SpawnTimer?.ForceStop(false);
         foreach(var alive in m_Alive){
             Destroy(alive.gameObject);
         }
+        m_Alive.Clear();
+        RandomSpawnTimer();
     }
 }
