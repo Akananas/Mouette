@@ -7,6 +7,7 @@ public class Boat : MonoBehaviour, IHitComp
     public int direction = 1;
     [SerializeField] private float speed;
     [SerializeField] int health = 100;
+    [SerializeField] int maxHealth = 100;
     List<MouetteScript> attackers = new List<MouetteScript>();
 
     // Start is called before the first frame update
@@ -65,5 +66,7 @@ public class Boat : MonoBehaviour, IHitComp
             }
             BoatManager.Instance.DestroyBoat(this);
         }
+
+        GetComponent<SpriteRenderer>().color = Color.Lerp(Color.HSVToRGB(200 / 255.0f, 0, 0), new Color(30 / 255.0f, 150 / 255.0f, 220 / 255.0f), 1.0f * health / maxHealth);
     }
 }
