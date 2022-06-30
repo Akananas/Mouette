@@ -29,4 +29,11 @@ public class ScoreManager : MonoBehaviour
         UIManager.Instance.ScoreBoat(boatCount, goalBoat);
         return false;
     }
+
+    public void Reset()
+    {
+        boatCount = 0;
+        goalBoat = 5;
+        UIManager.Instance.ScoreBoat(boatCount, goalBoat);
+    }
 }
