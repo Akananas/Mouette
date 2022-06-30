@@ -7,6 +7,7 @@ public class Boat : MonoBehaviour, IHitComp
     public int direction = 1;
     [SerializeField] private float speed;
     [SerializeField] int health = 100;
+    List<MouetteScript> attackers = new List<MouetteScript>();
 
     // Start is called before the first frame update
     void Start()

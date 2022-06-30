@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MouetteScript : MonoBehaviour, IHitComp
 {
     enum MouetteState{
-        LookingForBoat, Chasing, Hitted,
+        LookingForBoat, Chasing, Hitted, Attacking,
     };
 
     MouetteState m_MouetteState;
@@ -16,6 +17,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
     Transform m_MouetteTransform;
     Transform m_Target;
     float m_Speed;
+    Action m_OnHit;
     
     void Start(){
         if(m_NextPoint == null){
@@ -34,16 +36,24 @@ public class MouetteScript : MonoBehaviour, IHitComp
                 LookingForTarget();
                 break;
             case MouetteState.Chasing:
-                if(!Movement()){
-                    m_NextPoint = m_Target.position;
-                    CalculateDirection();
-                }
+                Chasing();
+                break;
+            case MouetteState.Attacking:
+                m_NextPoint = m_Target.position;
+                CalculateDirection();
                 break;
             case MouetteState.Hitted:
                 Movement();
                 break;
         }
     }
+
+    void Chasing(){
+        if(!Movement()){
+            m_MouetteState = MouetteState.Attacking;
+        }
+    }
+
         
     bool Movement(){
         if (Vector2.Distance(m_NextPoint, (Vector2)m_MouetteTransform.position) <= 0.1f){
@@ -66,6 +76,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
         }
     }
     
+    //Reste à améliorer l'approche des mouettes 
     void CalculatePath(){
         float _currentSpeed = m_Target.GetComponentInParent<Boat>().GetCurrentSpeed();
         Vector2 _targetPos = m_Target.position;
@@ -112,5 +123,6 @@ public class MouetteScript : MonoBehaviour, IHitComp
         m_Path.Clear();
         m_NextPoint = new Vector2(m_MouetteTransform.position.x, -3);
         CalculateDirection();
+        m_OnHit?.Invoke();
     }
 }
