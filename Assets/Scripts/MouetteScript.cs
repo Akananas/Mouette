@@ -30,7 +30,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
         CalculateDirection();
         m_MouetteState = MouetteState.LookingForBoat;
 
-        GameManager.Inst.AddTimer(() => { this.m_CanChase = true; }, 1.5f);
+        GameManager.Inst.AddTimer(() => { this.m_CanChase = true; }, 2.5f);
     }
     
     void Update(){

@@ -74,6 +74,7 @@ public class UIManager : MonoBehaviour
     {
         ScoreManager.Instance.Reset();
         BoatManager.Instance.Reset();
+        MouetteManager.Instance.Reset();
         GameManager.Inst.StartPlaying();
         Play();
     }
