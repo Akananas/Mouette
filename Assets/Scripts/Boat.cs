@@ -43,6 +43,8 @@ public class Boat : MonoBehaviour, IHitComp
     {
         health -= 10;
         if (health < 0)
-            Destroy(gameObject);
+        {
+            BoatManager.Instance.DestroyBoat(this);
+        }
     }
 }
