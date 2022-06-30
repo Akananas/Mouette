@@ -10,7 +10,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
 
     MouetteState m_MouetteState;
     Queue<Vector2> m_Path = new Queue<Vector2>();
-    [SerializeField]int m_PathStep;
+    //[SerializeField]int m_PathStep;
     [SerializeField]AnimationCurve m_ChasingPath;
     Vector2 m_NextPoint;
     Vector3 m_Dir;
@@ -103,16 +103,17 @@ public class MouetteScript : MonoBehaviour, IHitComp
     void CalculatePath(){
         float _currentSpeed = m_Target.GetComponentInParent<Boat>().GetCurrentSpeed();
         Vector2 _targetPos = m_Target.position;
+        int _newStep = (int)(m_MouetteTransform.position.y - _targetPos.y) + 1;
+        
         m_Path.Clear();
         float _endingX = _targetPos.x;
-        for(int i = 0; i <= m_PathStep; ++i){
-            _endingX += _currentSpeed / 1.5f;
+        for(int i = 0; i < _newStep; ++i){
+            _endingX += _currentSpeed;
         }
         
-        for(int i = 1; i <= m_PathStep; ++i){
-            float _yPos = Mathf.Lerp(m_MouetteTransform.position.y, _targetPos.y, (float)i/(float)m_PathStep);
-            float _xPos = m_ChasingPath.Evaluate((float)i/(float)m_PathStep) * _currentSpeed + _endingX;
-            
+        for(int i = 1; i <= _newStep; ++i){
+            float _yPos = Mathf.Lerp(m_MouetteTransform.position.y, _targetPos.y, (float)i/(float)_newStep);
+            float _xPos = m_ChasingPath.Evaluate((float)i/(float)_newStep) *  _currentSpeed + _endingX;
             m_Path.Enqueue(new Vector2(_xPos, _yPos));
         }
         
