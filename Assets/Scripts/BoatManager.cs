@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BoatManager : MonoBehaviour
 {
+    public static BoatManager Instance;
     [SerializeField] private bool spawn = true;
     public Boat boat;
     public Vector2 range;
@@ -12,6 +13,8 @@ public class BoatManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!Instance)
+            Instance = this;
         StartCoroutine(Spawning());
     }
 
@@ -21,19 +24,13 @@ public class BoatManager : MonoBehaviour
         
     }
 
+    // Spawn boat Function
     void Spawn()
     {
-        int dir = 1;
-        if (dir < 0)
-        {
-            Instantiate(boat, new Vector3(-boat.GetComponent<SpriteRenderer>().size.x, 0, 0), Quaternion.identity);
-        }
-        else
-        {
-            Instantiate(boat, new Vector3(Screen.width + boat.GetComponent<SpriteRenderer>().size.x, 0, 0), Quaternion.identity);
-        }
+        Instantiate(boat, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 90));
     }
 
+    // Spawning Loop
     IEnumerator Spawning()
     {
         while (spawn)
