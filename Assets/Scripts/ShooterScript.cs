@@ -56,6 +56,7 @@ public class ShooterScript : MonoBehaviour
     {
         animator.SetBool("CanShoot", false);
         animator.SetTrigger("Shoot");
+        GameManager.Inst.CamShaker.StartShaking(0.25f);
         Collider2D[] _hitObjects = Physics2D.OverlapCircleAll(position, m_Radius, m_HittableObjects);
         foreach (var obj in _hitObjects){
             obj.GetComponentInParent<IHitComp>().Hit();

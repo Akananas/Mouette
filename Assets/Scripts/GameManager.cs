@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Inst;
     List<Timer> m_Timers = new List<Timer>();
     public bool IsPlaying {get; set;}
+    public CameraShake CamShaker {get; private set;}
     
     void Awake(){
         if (Inst == null){
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         IsPlaying = false;
+        CamShaker = Camera.main.GetComponent<CameraShake>();
     }
 
     public void StartPlaying(){
