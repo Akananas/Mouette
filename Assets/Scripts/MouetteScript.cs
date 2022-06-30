@@ -18,7 +18,9 @@ public class MouetteScript : MonoBehaviour, IHitComp
     float m_Speed;
     
     void Start(){
-        m_NextPoint = new Vector2(10, 0);
+        if(m_NextPoint == null){
+            m_NextPoint = new Vector2(10, 0);
+        }
         m_MouetteTransform = transform;
         m_Speed = 1;
         CalculateDirection();
@@ -54,6 +56,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
         }
         
         m_MouetteTransform.position = Vector2.MoveTowards(m_MouetteTransform.position, m_NextPoint, m_Speed * Time.deltaTime);
+
         return true;
     }
     
@@ -90,6 +93,11 @@ public class MouetteScript : MonoBehaviour, IHitComp
     
     void CalculateDirection(){
         m_Dir = ((Vector3)m_NextPoint - m_MouetteTransform.position).normalized;
+        m_MouetteTransform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(m_Dir.x, m_Dir.y));
+    }
+
+    public void SetNextPoint(Vector2 val){
+        m_NextPoint = val;
     }
     
     void OnTriggerEnter2D(Collider2D col){
