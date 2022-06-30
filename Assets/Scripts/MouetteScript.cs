@@ -14,6 +14,17 @@ public class MouetteScript : MonoBehaviour, IHitComp
         GameManager.Inst?.AddTimer(TimerTest, 1.0f, true, 0);
     }
     
+    void Update(){
+        switch (mouetteState){
+            case MouetteState.LookingForBoat:
+                break;
+            case MouetteState.Chasing:
+                break;
+            case MouetteState.Hitted:
+                break;
+        }
+    }
+    
     void TimerTest(){
         Debug.Log("Timer");
     }
