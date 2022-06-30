@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boat : MonoBehaviour
+public class Boat : MonoBehaviour, IHitComp
 {
     public int direction = 1;
     [SerializeField] private float speed;
@@ -24,8 +24,6 @@ public class Boat : MonoBehaviour
     bool CheckFinish()
     {
         float X = Camera.main.WorldToScreenPoint(transform.position).x;
-        Debug.Log(GetComponent<SpriteRenderer>().size.x);
-        Debug.Log(X);
         if (direction > 0)
         {
             return Camera.main.WorldToScreenPoint(transform.position - Vector3.right * GetComponent<SpriteRenderer>().size.x).x > Screen.width;
@@ -34,5 +32,9 @@ public class Boat : MonoBehaviour
         {
             return Camera.main.WorldToScreenPoint(transform.position + Vector3.right * GetComponent<SpriteRenderer>().size.x).x < 0;
         }
+    }
+
+    public void Hit()
+    {
     }
 }
