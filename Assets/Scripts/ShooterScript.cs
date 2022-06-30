@@ -25,6 +25,10 @@ public class ShooterScript : MonoBehaviour
     }
     
     void Update(){
+        if(!GameManager.Inst.IsPlaying){
+            return;
+        }
+
         if(Input.GetMouseButton(0) && m_CanShoot){
             m_CanShoot = false;
             Vector2 _mousePosition = Input.mousePosition;

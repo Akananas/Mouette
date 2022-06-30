@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Inst;
     List<Timer> m_Timers = new List<Timer>();
+    public bool IsPlaying {get; set;}
     
     void Awake(){
         if (Inst == null){
@@ -14,6 +15,11 @@ public class GameManager : MonoBehaviour
         else{
             Destroy(this.gameObject);
         }
+        IsPlaying = false;
+    }
+
+    public void StartPlaying(){
+        IsPlaying = true;
     }
     
     void Update(){

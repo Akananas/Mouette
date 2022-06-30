@@ -18,6 +18,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
     Transform m_Target;
     float m_Speed;
     public Action<MouetteScript> OnHit { get; set; }
+    public Action<MouetteScript> OnDeath { get; set; }
     bool m_CanChase;
     
     void Start(){
@@ -51,7 +52,10 @@ public class MouetteScript : MonoBehaviour, IHitComp
                 Movement();
                 break;
             case MouetteState.Hitted:
-                Movement();
+                if(!Movement()){
+                    OnDeath?.Invoke(this);
+                    Destroy(this.gameObject);
+                }
                 break;
         }
     }

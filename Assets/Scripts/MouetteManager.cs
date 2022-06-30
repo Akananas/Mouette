@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MouetteManager : MonoBehaviour
 {
-    List<MouetteScript> m_Alive;
+    HashSet<MouetteScript> m_Alive = new HashSet<MouetteScript>();
     [SerializeField]GameObject prefab;
     [SerializeField]Vector2 spawnRate;
 
@@ -14,14 +14,16 @@ public class MouetteManager : MonoBehaviour
 
     void SpawnMouette(){
         Vector3 spawnPoint = GetRandomSpawnPoint();
-        GameObject go = Instantiate(prefab, spawnPoint, Quaternion.identity); 
+        MouetteScript mouette = Instantiate(prefab, spawnPoint, Quaternion.identity).GetComponent<MouetteScript>();
         if(spawnPoint.x > 0){
-            go.GetComponent<MouetteScript>().SetNextPoint(new Vector2(-10, spawnPoint.y));
+            mouette.SetNextPoint(new Vector2(-10, spawnPoint.y));
         }
         else{
-            go.GetComponent<MouetteScript>().SetNextPoint(new Vector2(10, spawnPoint.y));
+            mouette.GetComponent<MouetteScript>().SetNextPoint(new Vector2(10, spawnPoint.y));
         }
 
+        mouette.OnDeath = RemoveFromAlive;
+        m_Alive.Add(mouette);
         RandomSpawnTimer();
     }
 
@@ -35,5 +37,15 @@ public class MouetteManager : MonoBehaviour
         float x = right == 1 ? 10 : -10;
         float y = Random.Range(1.0f, 4.5f);
         return new Vector3(x, y, 0);
+    }
+
+    void RemoveFromAlive(MouetteScript mouette){
+        m_Alive.Remove(mouette);
+    }
+
+    public void Reset(){
+        foreach(var alive in m_Alive){
+            Destroy(alive.gameObject);
+        }
     }
 }
