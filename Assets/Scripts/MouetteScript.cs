@@ -37,7 +37,12 @@ public class MouetteScript : MonoBehaviour, IHitComp
         switch (m_MouetteState){
             case MouetteState.LookingForBoat:
                 Movement();
-                LookingForTarget();
+                if(LookingForTarget()){
+                    break;
+                }
+                if(m_CanChase && (m_MouetteTransform.position.x > 10 || m_MouetteTransform.position.x < -10)){
+                    Death();
+                }
                 break;
             case MouetteState.Chasing:
                 Chasing();
@@ -53,8 +58,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
                 break;
             case MouetteState.Hitted:
                 if(!Movement()){
-                    OnDeath?.Invoke(this);
-                    Destroy(this.gameObject);
+                    Death();
                 }
                 break;
         }
@@ -87,10 +91,12 @@ public class MouetteScript : MonoBehaviour, IHitComp
         return true;
     }
     
-    void LookingForTarget(){
+    bool LookingForTarget(){
         if(m_CanChase && m_Target){
             CalculatePath();
+            return true;
         }
+        return false;
     }
     
     //Reste à améliorer l'approche des mouettes 
@@ -154,6 +160,11 @@ public class MouetteScript : MonoBehaviour, IHitComp
     
     public void RemoveFromBoat(){
         ResetLooking();
+    }
+
+    void Death(){
+        OnDeath?.Invoke(this);
+        Destroy(this.gameObject);
     }
 
     void ResetLooking(){
