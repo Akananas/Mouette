@@ -32,7 +32,17 @@ public class BoatManager : MonoBehaviour
     // Spawn boat Function
     void Spawn()
     {
-        Instantiate(boat, new Vector3(-10, 0, 0), Quaternion.Euler(0, 0, 90));
+        int rand = Random.Range(0, 10);
+        if (rand % 2 == 0)
+        {
+            Instantiate(boat, new Vector3(-10, 0, 1), Quaternion.Euler(0, 0, 90));
+
+        }
+        else
+        {
+            Boat go = Instantiate(boat, new Vector3(10, 0, 1), Quaternion.Euler(0, 0, 90));
+            go.direction = -1;
+        }
     }
 
     // Spawning Loop
