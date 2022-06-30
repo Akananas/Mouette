@@ -16,13 +16,17 @@ public class BoatManager : MonoBehaviour
     {
         if (!Instance)
             Instance = this;
-        StartCoroutine(Spawning());
+        EnableSpawning(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void EnableSpawning(bool val)
     {
-        
+        if (val)
+        {
+            StartCoroutine(Spawning());
+        }
+        else
+            spawn = false;
     }
 
     // Spawn boat Function
@@ -31,22 +35,37 @@ public class BoatManager : MonoBehaviour
         Instantiate(boat, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 90));
     }
 
-    public void DestroyBoat(Boat boat)
-    {
-        Destroy(boat.gameObject);
-        boatLeft--;
-        if (boatLeft <= 0) {
-            // Game Over
-        }
-    }
-
     // Spawning Loop
     IEnumerator Spawning()
     {
+        spawn = true;
         while (spawn)
         {
             Spawn();
             yield return new WaitForSeconds(Random.Range(range.x, range.y));
         }
     }
+
+    public void DestroyBoat(Boat boat)
+    {
+        Destroy(boat.gameObject);
+        boatLeft--;
+        UIManager.Instance.BoatLeft(boatLeft);
+        if (boatLeft <= 0) {
+            UIManager.Instance.Defeat();
+            EnableSpawning(false);
+        }
+    }
+
+    
+    // Reset Spawning (for begin play)
+    public void Reset()
+    {
+        boatLeft = 3;
+        foreach (Boat b in FindObjectsOfType<Boat>())
+            Destroy(b.gameObject);
+        UIManager.Instance.BoatLeft(boatLeft);
+        EnableSpawning(true);
+    }
+
 }

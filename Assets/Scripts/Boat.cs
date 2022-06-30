@@ -41,6 +41,7 @@ public class Boat : MonoBehaviour, IHitComp
 
     public void Hit()
     {
+        Debug.Log("Boat Hit");
         health -= 10;
         if (health < 0)
         {

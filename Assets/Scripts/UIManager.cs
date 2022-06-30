@@ -10,9 +10,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private GameObject playingPanel;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject defeatScreen;
 
     [SerializeField] private Image cursor;
     [SerializeField] private Text scoreBoat;
+    [SerializeField] private Text boatLeft;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +36,7 @@ public class UIManager : MonoBehaviour
     {
         mainMenuPanel.SetActive(false);
         pausePanel.SetActive(false);
+        defeatScreen.SetActive(false);
         playingPanel.SetActive(true);
         Time.timeScale = 1;
     }
@@ -52,7 +55,17 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0;
         playingPanel.SetActive(false);
         pausePanel.SetActive(false);
+        defeatScreen.SetActive(false);
         mainMenuPanel.SetActive(true);
+    }
+
+    public void Defeat()
+    {
+        Time.timeScale = 0;
+        playingPanel.SetActive(false);
+        pausePanel.SetActive(false);
+        mainMenuPanel.SetActive(false);
+        defeatScreen.SetActive(true);
     }
     #endregion
 
@@ -60,7 +73,10 @@ public class UIManager : MonoBehaviour
     public void PlayButton()
     {
         ScoreManager.Instance.Reset();
+        BoatManager.Instance.Reset();
+        // GameManager.Play();
         Play();
+        // GameManager.Play();
     }
 
 
@@ -73,5 +89,10 @@ public class UIManager : MonoBehaviour
     public void ScoreBoat(int count, int goal)
     {
         scoreBoat.text = count + " / " + goal;
+    }
+
+    public void BoatLeft(int left)
+    {
+        boatLeft.text = left.ToString();
     }
 }
