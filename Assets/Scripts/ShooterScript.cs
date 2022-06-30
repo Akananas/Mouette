@@ -61,15 +61,25 @@ public class ShooterScript : MonoBehaviour
         animator.SetBool("CanShoot", false);
         animator.SetTrigger("Shoot");
         GameManager.Inst.CamShaker.StartShaking(0.25f);
+        m_CurrentProjectile?.Launch(position, 50.0f, BasicShootHitDetection);
+        m_ReloadTimer = GameManager.Inst?.AddTimer(Reload, m_BaseFireRate * m_FireRateMultiplier);
+    }
+
+    void BasicShootHitDetection(Vector2 position){
         Collider2D[] _hitObjects = Physics2D.OverlapCircleAll(position, m_Radius, m_HittableObjects);
         foreach (var obj in _hitObjects){
             obj.GetComponentInParent<IHitComp>().Hit();
         }
-        m_CurrentProjectile?.Launch(position, 50.0f);
-        m_ReloadTimer = GameManager.Inst?.AddTimer(Reload, m_BaseFireRate * m_FireRateMultiplier);
     }
 
     void BombShoot(Vector2 position){
+        m_CurrentProjectile?.Launch(position, 60.0f, BombShootHitDetection);
+        m_ReloadTimer = GameManager.Inst?.AddTimer(Reload, m_BaseFireRate * m_FireRateMultiplier);
+        m_UseBomb = false;
+        m_CurrentShoot = BasicShoot;
+    }
+
+    void BombShootHitDetection(Vector2 position){
         Collider2D[] _hitObjects = Physics2D.OverlapCircleAll(position, m_BombRadius, m_HittableObjects);
         HashSet<Collider2D> _hitObjectsCenter = new HashSet<Collider2D>(Physics2D.OverlapCircleAll(position, m_Radius, m_HittableObjects));
         foreach (var obj in _hitObjects){
@@ -80,10 +90,6 @@ public class ShooterScript : MonoBehaviour
                 obj.GetComponentInParent<IHitComp>()?.BombHit();
             }
         }
-        m_CurrentProjectile?.Launch(position, 60.0f);
-        m_ReloadTimer = GameManager.Inst?.AddTimer(Reload, m_BaseFireRate * m_FireRateMultiplier);
-        m_UseBomb = false;
-        m_CurrentShoot = BasicShoot;
     }
 
     void Reload(){
