@@ -13,12 +13,15 @@ public class ShooterScript : MonoBehaviour
     float m_FireRateMultiplier;
     Action<Vector2> m_CurrentShoot;
     Timer m_ReloadTimer;
+
+    Animator animator;
     
     void Start(){
         m_CanShoot = true;
         m_UseBomb = false;
         m_CurrentShoot = BasicShoot;
         m_FireRateMultiplier = 1.0f;
+        animator = GetComponent<Animator>();
     }
     
     void Update(){
@@ -45,7 +48,10 @@ public class ShooterScript : MonoBehaviour
         }
     }
     
-    void BasicShoot(Vector2 position){
+    void BasicShoot(Vector2 position)
+    {
+        animator.SetBool("CanShoot", false);
+        animator.SetTrigger("Shoot");
         Collider2D[] _hitObjects = Physics2D.OverlapCircleAll(position, m_Radius, m_HittableObjects);
         foreach (var obj in _hitObjects){
             obj.GetComponentInParent<IHitComp>().Hit();
@@ -71,5 +77,6 @@ public class ShooterScript : MonoBehaviour
 
     void Reload(){
         m_CanShoot = true;
+        animator.SetBool("CanShoot", true);
     }
 }
