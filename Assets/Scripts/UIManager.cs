@@ -91,6 +91,7 @@ public class UIManager : MonoBehaviour
 
     public void ScoreBoat(int count, int goal)
     {
+        Debug.Log("UIScore");
         scoreBoat.text = count + " / " + goal;
     }
 

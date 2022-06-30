@@ -13,15 +13,18 @@ public class Boat : MonoBehaviour, IHitComp
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (direction < 0)
+            GetComponent<SpriteRenderer>().flipX = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.position += Vector3.right * (direction * speed * Time.deltaTime);
-        if (CheckFinish()){
-            direction *= -1;
+        if (CheckFinish())
+        {
+            ScoreManager.Instance.ScoreBoat();
+            Destroy(gameObject);
         }
         for(int i = 0; i < attackers.Count; ++i){
             Hit(10.0f * Time.deltaTime);
