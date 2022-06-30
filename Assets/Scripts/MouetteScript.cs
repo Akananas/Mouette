@@ -140,7 +140,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
     }
     
     void OnTriggerExit2D(Collider2D col){
-        if(m_MouetteState != MouetteState.Chasing && col.CompareTag("MouetteTarget") && m_Target == col.gameObject.transform){
+        if(m_MouetteState != MouetteState.Chasing && m_MouetteState != MouetteState.Hitted && col.CompareTag("MouetteTarget") && m_Target == col.gameObject.transform){
             ResetLooking();
         }
     }
