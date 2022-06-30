@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image cursor;
     [SerializeField] private Text scoreBoat;
     [SerializeField] private Text boatLeft;
+    [SerializeField] private Text endScoreBoat;
+    [SerializeField] private Text endScoreSeagull;
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +68,7 @@ public class UIManager : MonoBehaviour
         pausePanel.SetActive(false);
         mainMenuPanel.SetActive(false);
         defeatScreen.SetActive(true);
+        ScoreManager.Instance.Endgame();
     }
     #endregion
 
@@ -94,5 +97,11 @@ public class UIManager : MonoBehaviour
     public void BoatLeft(int left)
     {
         boatLeft.text = left.ToString();
+    }
+
+    public void EndScore(int boats, int seagulls)
+    {
+        endScoreBoat.text = "Youo saved " + boats + "boats";
+        endScoreSeagull.text = "and fed " + seagulls + "seagulls!";
     }
 }
