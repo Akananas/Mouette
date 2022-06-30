@@ -153,7 +153,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4380b2d5a06e583499e03254e430cc96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawn: 1
   boat: {fileID: 6335027756147976444, guid: 8cc141a422082ff479d272ece3f36279, type: 3}
+  range: {x: 0.27, y: 0.5}
 --- !u!114 &238088508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,6 +591,7 @@ MonoBehaviour:
   m_HittableObjects:
     serializedVersion: 2
     m_Bits: 0
+  m_BaseFireRate: 0
 --- !u!212 &1760208305
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -673,11 +676,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9051836977432529613, guid: 8cc141a422082ff479d272ece3f36279, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9051836977432529613, guid: 8cc141a422082ff479d272ece3f36279, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9051836977432529613, guid: 8cc141a422082ff479d272ece3f36279, type: 3}
       propertyPath: m_LocalPosition.z
