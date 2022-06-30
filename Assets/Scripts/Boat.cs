@@ -6,6 +6,7 @@ public class Boat : MonoBehaviour, IHitComp
 {
     public int direction = 1;
     [SerializeField] private float speed;
+    [SerializeField] int health = 100;
 
     // Start is called before the first frame update
     void Start()
