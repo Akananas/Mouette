@@ -147,6 +147,10 @@ public class MouetteScript : MonoBehaviour, IHitComp
         CalculateDirection();
         OnHit?.Invoke(this);
     }
+
+    public void BombHit(float damage = 10.0f){
+        Hit();
+    }
     
     public void RemoveFromBoat(){
         ResetLooking();

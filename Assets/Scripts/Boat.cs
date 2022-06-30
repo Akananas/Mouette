@@ -69,4 +69,8 @@ public class Boat : MonoBehaviour, IHitComp
 
         GetComponent<SpriteRenderer>().color = Color.Lerp(Color.HSVToRGB(200 / 255.0f, 0, 0), new Color(30 / 255.0f, 150 / 255.0f, 220 / 255.0f), 1.0f * health / maxHealth);
     }
+
+    public void BombHit(float damage = 10.0f){
+
+    }
 }

@@ -74,10 +74,10 @@ public class ShooterScript : MonoBehaviour
         HashSet<Collider2D> _hitObjectsCenter = new HashSet<Collider2D>(Physics2D.OverlapCircleAll(position, m_Radius, m_HittableObjects));
         foreach (var obj in _hitObjects){
             if(_hitObjectsCenter.Contains(obj)){
-                Debug.Log("In center");
+                obj.GetComponentInParent<IHitComp>()?.Hit();
             }
             else{
-                Debug.Log("In bomb radius");
+                obj.GetComponentInParent<IHitComp>()?.BombHit();
             }
         }
         m_CurrentProjectile?.Launch(position, 60.0f);
