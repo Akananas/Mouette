@@ -48,7 +48,7 @@ public class ShooterScript : MonoBehaviour
     void BasicShoot(Vector2 position){
         Collider2D[] _hitObjects = Physics2D.OverlapCircleAll(position, m_Radius, m_HittableObjects);
         foreach (var obj in _hitObjects){
-            Debug.Log("Hit object");
+            obj.GetComponentInParent<IHitComp>().Hit();
         }
         m_ReloadTimer = GameManager.Inst?.AddTimer(Reload, m_BaseFireRate * m_FireRateMultiplier);
     }

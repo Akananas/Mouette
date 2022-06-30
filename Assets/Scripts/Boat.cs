@@ -33,6 +33,10 @@ public class Boat : MonoBehaviour, IHitComp
             return Camera.main.WorldToScreenPoint(transform.position + Vector3.right * GetComponent<SpriteRenderer>().size.x).x < 0;
         }
     }
+    
+    public float GetCurrentSpeed(){
+        return speed * direction;
+    }
 
     public void Hit()
     {
