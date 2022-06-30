@@ -61,14 +61,19 @@ public class MouetteScript : MonoBehaviour, IHitComp
     }
 
     void Chasing(){
+        if(m_Target == null){
+            ResetLooking();
+            return;
+        }
         if(!Movement()){
             m_MouetteState = MouetteState.Attacking;
+            m_Target.GetComponentInParent<Boat>().AddAttacker(this);
         }
     }
 
         
     bool Movement(){
-        if (Vector2.Distance(m_NextPoint, (Vector2)m_MouetteTransform.position) <= 0.1f){
+        if (Vector2.Distance(m_NextPoint, (Vector2)m_MouetteTransform.position) <= 0.01f){
             if(m_Path.Count == 0){
                 return false;
             }
@@ -130,10 +135,10 @@ public class MouetteScript : MonoBehaviour, IHitComp
     
     void OnTriggerExit2D(Collider2D col){
         if(m_MouetteState != MouetteState.Chasing && col.CompareTag("MouetteTarget") && m_Target == col.gameObject.transform){
-            m_Target = null; 
+            ResetLooking();
         }
     }
-    public void Hit(){
+    public void Hit(float damage = 10.0f){
         Debug.Log("Mouette hit");
         ScoreManager.Instance.ScoreSeagull();
         m_MouetteState = MouetteState.Hitted;
@@ -142,9 +147,25 @@ public class MouetteScript : MonoBehaviour, IHitComp
         CalculateDirection();
         OnHit?.Invoke(this);
     }
+
+    public void BombHit(float damage = 10.0f){
+        Hit();
+    }
     
     public void RemoveFromBoat(){
+        ResetLooking();
+    }
+
+    void ResetLooking(){
         m_Target = null;
         m_MouetteState = MouetteState.LookingForBoat;
+        m_NextPoint = RandomPointOutsideScreen();
+    }
+    
+    Vector2 RandomPointOutsideScreen(){
+        int right = UnityEngine.Random.Range(0,2);
+        float x = right == 1 ? 10 : -10;
+        float y = UnityEngine.Random.Range(1.0f, 4.5f);
+        return new Vector2(x, y);
     }
 }

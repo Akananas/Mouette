@@ -13,6 +13,9 @@ public class ShooterScript : MonoBehaviour
     float m_FireRateMultiplier;
     Action<Vector2> m_CurrentShoot;
     Timer m_ReloadTimer;
+    ProjectileScript m_CurrentProjectile;
+    [SerializeField]Transform m_ProjectileSpawnPoint;
+    [SerializeField]GameObject m_ProjectilePrefab;
 
     Animator animator;
     
@@ -22,6 +25,7 @@ public class ShooterScript : MonoBehaviour
         m_CurrentShoot = BasicShoot;
         m_FireRateMultiplier = 1.0f;
         animator = GetComponent<Animator>();
+        Reload();
     }
     
     void Update(){
@@ -61,6 +65,7 @@ public class ShooterScript : MonoBehaviour
         foreach (var obj in _hitObjects){
             obj.GetComponentInParent<IHitComp>().Hit();
         }
+        m_CurrentProjectile?.Launch(position, 50.0f);
         m_ReloadTimer = GameManager.Inst?.AddTimer(Reload, m_BaseFireRate * m_FireRateMultiplier);
     }
 
@@ -69,12 +74,13 @@ public class ShooterScript : MonoBehaviour
         HashSet<Collider2D> _hitObjectsCenter = new HashSet<Collider2D>(Physics2D.OverlapCircleAll(position, m_Radius, m_HittableObjects));
         foreach (var obj in _hitObjects){
             if(_hitObjectsCenter.Contains(obj)){
-                Debug.Log("In center");
+                obj.GetComponentInParent<IHitComp>()?.Hit();
             }
             else{
-                Debug.Log("In bomb radius");
+                obj.GetComponentInParent<IHitComp>()?.BombHit();
             }
         }
+        m_CurrentProjectile?.Launch(position, 60.0f);
         m_ReloadTimer = GameManager.Inst?.AddTimer(Reload, m_BaseFireRate * m_FireRateMultiplier);
         m_UseBomb = false;
         m_CurrentShoot = BasicShoot;
@@ -83,5 +89,6 @@ public class ShooterScript : MonoBehaviour
     void Reload(){
         m_CanShoot = true;
         animator.SetBool("CanShoot", true);
+        m_CurrentProjectile = Instantiate(m_ProjectilePrefab, m_ProjectileSpawnPoint.position, Quaternion.identity).GetComponent<ProjectileScript>();
     }
 }
