@@ -5,6 +5,7 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
+    [SerializeField] private int seagullsCount = 0;
     [SerializeField] private int boatCount = 0;
     [SerializeField] private int boatCurrent = 0;
     [SerializeField] private int goalBoat = 5;
@@ -30,6 +31,17 @@ public class ScoreManager : MonoBehaviour
         }
         UIManager.Instance.ScoreBoat(boatCurrent, goalBoat);
         return false;
+    }
+
+    public void ScoreSeagull()
+    {
+        seagullsCount++;
+        
+    }
+
+    public void Endgame()
+    {
+        UIManager.Instance.EndScore(boatCount, seagullsCount);
     }
 
     public void Reset()

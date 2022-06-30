@@ -135,6 +135,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
     }
     public void Hit(){
         Debug.Log("Mouette hit");
+        ScoreManager.Instance.ScoreSeagull();
         m_MouetteState = MouetteState.Hitted;
         m_Path.Clear();
         m_NextPoint = new Vector2(m_MouetteTransform.position.x, -3);
