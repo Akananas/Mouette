@@ -5,11 +5,15 @@ using System;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance;
     [SerializeField] Sound[] sounds;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (!Instance)
+            Instance = this;
+
         for (int i = 0; i < sounds.Length; i++)
         {
             AudioSource source = gameObject.AddComponent<AudioSource>();

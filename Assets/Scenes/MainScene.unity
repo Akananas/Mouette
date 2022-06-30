@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2477811e04acc4842b625dc04ea39773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shooter: {fileID: 1916214569}
   seagullsCount: 0
   boatCount: 0
   boatCurrent: 0
@@ -867,6 +868,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1916214569 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7500743437887914664, guid: e52bc93d50549fb4aaad5467eb068552, type: 3}
+  m_PrefabInstance: {fileID: 1283654571}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916214564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff5c05cd97243a5439976275a3f67425, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2060977432
 PrefabInstance:
   m_ObjectHideFlags: 0

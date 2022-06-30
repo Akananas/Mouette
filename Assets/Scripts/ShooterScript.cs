@@ -6,6 +6,7 @@ public class ShooterScript : MonoBehaviour
 {
     bool m_CanShoot;
     bool m_UseBomb;
+    public float shootForce = 50.0f;
     [SerializeField]float m_Radius;
     [SerializeField]float m_BombRadius;
     [SerializeField]LayerMask m_HittableObjects;
@@ -61,7 +62,7 @@ public class ShooterScript : MonoBehaviour
         animator.SetBool("CanShoot", false);
         animator.SetTrigger("Shoot");
         GameManager.Inst.CamShaker.StartShaking(0.25f);
-        m_CurrentProjectile?.Launch(position, 50.0f, BasicShootHitDetection);
+        m_CurrentProjectile?.Launch(position, shootForce, BasicShootHitDetection);
         m_ReloadTimer = GameManager.Inst?.AddTimer(Reload, m_BaseFireRate * m_FireRateMultiplier);
     }
 
@@ -96,5 +97,11 @@ public class ShooterScript : MonoBehaviour
         m_CanShoot = true;
         animator.SetBool("CanShoot", true);
         m_CurrentProjectile = Instantiate(m_ProjectilePrefab, m_ProjectileSpawnPoint.position, Quaternion.identity).GetComponent<ProjectileScript>();
+    }
+
+    public void Upgrade()
+    {
+        m_FireRateMultiplier *= 2.0f;
+        shootForce *= 2.5f;
     }
 }
