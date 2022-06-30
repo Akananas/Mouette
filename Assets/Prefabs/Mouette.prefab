@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5846641776052477717}
   - component: {fileID: 5846641776052477714}
   - component: {fileID: 5846641776052477716}
+  - component: {fileID: 15337143}
   m_Layer: 0
   m_Name: Mouette
   m_TagString: Untagged
@@ -98,7 +99,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9584036fffca4dc498242ad87182c035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PathStep: 0
+  m_PathStep: 10
+  m_ChasingPath:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.8786008
+      outSlope: 2.8786008
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5050424
+      value: 1.4538155
+      inSlope: -0.029325724
+      outSlope: -0.029325724
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2.9372523
+      outSlope: -2.9372523
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!50 &15337143
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5846641776052477712}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &6198700510880749303
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class Boat : MonoBehaviour, IHitComp
 {
     public int direction = 1;
     [SerializeField] private float speed;
-    [SerializeField] private float health = 100.0f;
+    [SerializeField] int health = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -19,20 +19,20 @@ public class Boat : MonoBehaviour, IHitComp
     {
         transform.position += Vector3.right * (direction * speed * Time.deltaTime);
         if (CheckFinish())
-        {
-            ScoreManager.Instance.ScoreBoat();
-            Destroy(gameObject);
-        }
+            direction *= -1;
     }
 
-    // Return true if boat has arrived at destination
     bool CheckFinish()
     {
         float X = Camera.main.WorldToScreenPoint(transform.position).x;
         if (direction > 0)
-            return Camera.main.WorldToScreenPoint(transform.position - Vector3.right * GetComponent<SpriteRenderer>().size.x).x > Screen.width;
+        {
+            return Camera.main.WorldToScreenPoint(transform.position - Vector3.right * GetComponentInParent<SpriteRenderer>().size.x).x > Screen.width;
+        }
         else
-            return Camera.main.WorldToScreenPoint(transform.position + Vector3.right * GetComponent<SpriteRenderer>().size.x).x < 0;
+        {
+            return Camera.main.WorldToScreenPoint(transform.position + Vector3.right * GetComponentInParent<SpriteRenderer>().size.x).x < 0;
+        }
     }
     
     public float GetCurrentSpeed(){
