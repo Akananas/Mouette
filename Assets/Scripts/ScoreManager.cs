@@ -6,6 +6,7 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
     [SerializeField] private int boatCount = 0;
+    [SerializeField] private int boatCurrent = 0;
     [SerializeField] private int goalBoat = 5;
 
 
@@ -19,21 +20,22 @@ public class ScoreManager : MonoBehaviour
     public bool ScoreBoat()
     {
         boatCount++;
-        if (boatCount >= goalBoat)
+        boatCurrent++;
+        if (boatCurrent >= goalBoat)
         {
-            boatCount = 0;
+            boatCurrent = 0;
             goalBoat *= 2;
             UIManager.Instance.ScoreBoat(0, goalBoat);
             return true;
         }
-        UIManager.Instance.ScoreBoat(boatCount, goalBoat);
+        UIManager.Instance.ScoreBoat(boatCurrent, goalBoat);
         return false;
     }
 
     public void Reset()
     {
-        boatCount = 0;
+        boatCurrent = 0;
         goalBoat = 5;
-        UIManager.Instance.ScoreBoat(boatCount, goalBoat);
+        UIManager.Instance.ScoreBoat(boatCurrent, goalBoat);
     }
 }
