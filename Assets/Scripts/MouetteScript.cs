@@ -17,7 +17,8 @@ public class MouetteScript : MonoBehaviour, IHitComp
     Transform m_MouetteTransform;
     Transform m_Target;
     float m_Speed;
-    Action m_OnHit;
+    public Action<MouetteScript> OnHit { get; set; }
+    bool m_CanChase;
     
     void Start(){
         if(m_NextPoint == null){
@@ -27,6 +28,8 @@ public class MouetteScript : MonoBehaviour, IHitComp
         m_Speed = 1;
         CalculateDirection();
         m_MouetteState = MouetteState.LookingForBoat;
+
+        GameManager.Inst.AddTimer(() => { this.m_CanChase = true; }, 1.5f);
     }
     
     void Update(){
@@ -39,8 +42,13 @@ public class MouetteScript : MonoBehaviour, IHitComp
                 Chasing();
                 break;
             case MouetteState.Attacking:
+                if(m_Target == null){
+                    m_MouetteState = MouetteState.LookingForBoat;
+                    break;
+                }
                 m_NextPoint = m_Target.position;
                 CalculateDirection();
+                Movement();
                 break;
             case MouetteState.Hitted:
                 Movement();
@@ -71,7 +79,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
     }
     
     void LookingForTarget(){
-        if(m_Target){
+        if(m_CanChase && m_Target){
             CalculatePath();
         }
     }
@@ -96,7 +104,6 @@ public class MouetteScript : MonoBehaviour, IHitComp
         m_NextPoint = m_Path.Dequeue();
         m_Speed = 2;
         CalculateDirection();
-        Debug.Log(m_NextPoint);
         
         m_MouetteState = MouetteState.Chasing;
     }
@@ -117,12 +124,22 @@ public class MouetteScript : MonoBehaviour, IHitComp
         }
     }
     
+    void OnTriggerExit2D(Collider2D col){
+        if(m_MouetteState != MouetteState.Chasing && col.CompareTag("MouetteTarget") && m_Target == col.gameObject.transform){
+            m_Target = null; 
+        }
+    }
     public void Hit(){
         Debug.Log("Mouette hit");
         m_MouetteState = MouetteState.Hitted;
         m_Path.Clear();
         m_NextPoint = new Vector2(m_MouetteTransform.position.x, -3);
         CalculateDirection();
-        m_OnHit?.Invoke();
+        OnHit?.Invoke(this);
+    }
+    
+    public void RemoveFromBoat(){
+        m_Target = null;
+        m_MouetteState = MouetteState.LookingForBoat;
     }
 }

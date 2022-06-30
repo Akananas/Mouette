@@ -32,7 +32,7 @@ public class BoatManager : MonoBehaviour
     // Spawn boat Function
     void Spawn()
     {
-        Instantiate(boat, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 90));
+        Instantiate(boat, new Vector3(-10, 0, 0), Quaternion.Euler(0, 0, 90));
     }
 
     // Spawning Loop

@@ -21,6 +21,10 @@ public class Boat : MonoBehaviour, IHitComp
         transform.position += Vector3.right * (direction * speed * Time.deltaTime);
         if (CheckFinish())
             direction *= -1;
+            
+        for(int i = 0; i < attackers.Count; ++i){
+            Hit();
+        }
     }
 
     bool CheckFinish()
@@ -36,6 +40,15 @@ public class Boat : MonoBehaviour, IHitComp
         }
     }
     
+    public void AddAttacker(MouetteScript mouette){
+        mouette.OnHit = RemoveAttacker;
+        attackers.Add(mouette);
+    }
+    
+    void RemoveAttacker(MouetteScript mouette){
+        attackers.Remove(mouette);
+    }
+    
     public float GetCurrentSpeed(){
         return speed * direction;
     }
@@ -46,6 +59,10 @@ public class Boat : MonoBehaviour, IHitComp
         health -= 10;
         if (health < 0)
         {
+            foreach(var mouette in attackers){
+                mouette.RemoveFromBoat();
+                mouette.OnHit -= RemoveAttacker;
+            }
             BoatManager.Instance.DestroyBoat(this);
         }
     }

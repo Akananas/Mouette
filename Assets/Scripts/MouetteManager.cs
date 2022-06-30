@@ -6,9 +6,10 @@ public class MouetteManager : MonoBehaviour
 {
     List<MouetteScript> m_Alive;
     [SerializeField]GameObject prefab;
+    [SerializeField]Vector2 spawnRate;
 
     void Start(){
-        GameManager.Inst.AddTimer(SpawnMouette, 2.5f);
+        RandomSpawnTimer();
     }
 
     void SpawnMouette(){
@@ -16,13 +17,17 @@ public class MouetteManager : MonoBehaviour
         GameObject go = Instantiate(prefab, spawnPoint, Quaternion.identity); 
         if(spawnPoint.x > 0){
             go.GetComponent<MouetteScript>().SetNextPoint(new Vector2(-10, spawnPoint.y));
-            Debug.Log(spawnPoint.x);
         }
         else{
             go.GetComponent<MouetteScript>().SetNextPoint(new Vector2(10, spawnPoint.y));
         }
 
-        GameManager.Inst.AddTimer(SpawnMouette, 2.5f);
+        RandomSpawnTimer();
+    }
+
+    void RandomSpawnTimer(){
+        float time = Random.Range(spawnRate.x, spawnRate.y);
+        GameManager.Inst.AddTimer(SpawnMouette, time);
     }
 
     Vector3 GetRandomSpawnPoint(){
