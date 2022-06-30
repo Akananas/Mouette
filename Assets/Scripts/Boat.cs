@@ -6,8 +6,8 @@ public class Boat : MonoBehaviour, IHitComp
 {
     public int direction = 1;
     [SerializeField] private float speed;
-    [SerializeField] int health = 100;
-    [SerializeField] int maxHealth = 100;
+    [SerializeField] float health = 100;
+    [SerializeField] float maxHealth = 100;
     List<MouetteScript> attackers = new List<MouetteScript>();
 
     // Start is called before the first frame update
@@ -20,11 +20,11 @@ public class Boat : MonoBehaviour, IHitComp
     void Update()
     {
         transform.position += Vector3.right * (direction * speed * Time.deltaTime);
-        if (CheckFinish())
+        if (CheckFinish()){
             direction *= -1;
-            
+        }
         for(int i = 0; i < attackers.Count; ++i){
-            Hit();
+            Hit(10.0f * Time.deltaTime);
         }
     }
 
@@ -54,10 +54,10 @@ public class Boat : MonoBehaviour, IHitComp
         return speed * direction;
     }
 
-    public void Hit()
+    public void Hit(float damage = 10.0f)
     {
         Debug.Log("Boat Hit");
-        health -= 10;
+        health -= damage;
         if (health < 0)
         {
             foreach(var mouette in attackers){
