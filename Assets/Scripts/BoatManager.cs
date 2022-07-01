@@ -48,6 +48,7 @@ public class BoatManager : MonoBehaviour
             go = boat.gameObject;
         }
         go.transform.localScale = Vector3.Lerp(Vector3.one * .5f, Vector3.one, -(depth + 1.2f));
+        go.transform.position += Vector3.back * Mathf.Lerp(-.1f, .1f, -(depth + 1.2f));
     }
 
     // Spawning Loop
