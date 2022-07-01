@@ -64,7 +64,6 @@ public class BoatManager : MonoBehaviour
 
     public void DestroyBoat(Boat boat)
     {
-        Destroy(boat.gameObject);
         boatLeft--;
         UIManager.Instance.BoatLeft(boatLeft);
         if (boatLeft <= 0) {

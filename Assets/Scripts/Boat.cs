@@ -68,6 +68,7 @@ public class Boat : MonoBehaviour, IHitComp
                 mouette.OnHit -= RemoveAttacker;
             }
             BoatManager.Instance.DestroyBoat(this);
+            StartCoroutine(Sink());
         }
 
         GetComponent<SpriteRenderer>().color = Color.Lerp(Color.grey, Color.white, 1.0f * health / maxHealth);
@@ -75,5 +76,28 @@ public class Boat : MonoBehaviour, IHitComp
 
     public void BombHit(float damage = 10.0f){
 
+    }
+
+    IEnumerator Sink()
+    {
+        if (direction < 0)
+        {
+            for (float i = 0; i < 90; i += Time.deltaTime)
+            {
+                transform.localEulerAngles = new Vector3(0, 0, i);
+                transform.position += Vector3.down * i * Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        else
+        {
+            for (float i = 0; i < 90; i += Time.deltaTime)
+            {
+                transform.localEulerAngles = new Vector3(0, 0, -i);
+                transform.position += Vector3.down * -i * Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        Destroy(gameObject);
     }
 }
