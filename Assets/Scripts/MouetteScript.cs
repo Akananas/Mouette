@@ -162,7 +162,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
     {
         AudioManager.Instance.PlayClip("Plouf");
         GetComponent<Animator>().SetTrigger("Plouf");
-        Destroy(gameObject, 1);
+        Death();
     }
 
     public void BombHit(float damage = 10.0f){
