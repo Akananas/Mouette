@@ -10,7 +10,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
 
     MouetteState m_MouetteState;
     Queue<Vector2> m_Path = new Queue<Vector2>();
-    //[SerializeField]int m_PathStep;
+    [SerializeField]float m_PathStep;
     [SerializeField]AnimationCurve m_ChasingPath;
     Vector2 m_NextPoint;
     Vector3 m_Dir;
@@ -105,7 +105,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
     void CalculatePath(){
         float _currentSpeed = m_Target.GetComponentInParent<Boat>().GetCurrentSpeed();
         Vector2 _targetPos = m_Target.position;
-        int _newStep = (int)(m_MouetteTransform.position.y - _targetPos.y) + 1;
+        int _newStep = (int)(((int)(m_MouetteTransform.position.y - _targetPos.y) + 1) * m_PathStep);
         
         m_Path.Clear();
         float _endingX = _targetPos.x;
@@ -162,7 +162,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
     {
         AudioManager.Instance.PlayClip("Plouf");
         GetComponent<Animator>().SetTrigger("Plouf");
-        Destroy(gameObject, 1);
+        Death();
     }
 
     public void BombHit(float damage = 10.0f){
