@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9584036fffca4dc498242ad87182c035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PathStep: 10
+  m_PathStep: 1.5
   m_ChasingPath:
     serializedVersion: 2
     m_Curve:
