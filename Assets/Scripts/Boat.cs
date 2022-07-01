@@ -9,12 +9,14 @@ public class Boat : MonoBehaviour, IHitComp
     [SerializeField] float health = 100;
     [SerializeField] float maxHealth = 100;
     List<MouetteScript> attackers = new List<MouetteScript>();
+    [SerializeField] SpriteRenderer sprite;
+    [SerializeField] SpriteMask mask;
 
     // Start is called before the first frame update
     void Start()
     {
         if (direction < 0)
-            GetComponent<SpriteRenderer>().flipX = true;
+            sprite.flipX = true;
     }
 
     // Update is called once per frame
@@ -26,7 +28,8 @@ public class Boat : MonoBehaviour, IHitComp
             ScoreManager.Instance.ScoreBoat();
             Destroy(gameObject);
         }
-        for(int i = 0; i < attackers.Count; ++i){
+        for (int i = 0; i < attackers.Count; ++i)
+        {
             Hit(10.0f * Time.deltaTime);
         }
     }
@@ -36,45 +39,52 @@ public class Boat : MonoBehaviour, IHitComp
         float X = Camera.main.WorldToScreenPoint(transform.position).x;
         if (direction > 0)
         {
-            return Camera.main.WorldToScreenPoint(transform.position - Vector3.right * GetComponentInParent<SpriteRenderer>().size.x).x > Screen.width;
+            return Camera.main.WorldToScreenPoint(transform.position - Vector3.right * sprite.size.x).x > Screen.width;
         }
         else
         {
-            return Camera.main.WorldToScreenPoint(transform.position + Vector3.right * GetComponentInParent<SpriteRenderer>().size.x).x < 0;
+            return Camera.main.WorldToScreenPoint(transform.position + Vector3.right * sprite.size.x).x < 0;
         }
     }
-    
-    public void AddAttacker(MouetteScript mouette){
+
+    public void AddAttacker(MouetteScript mouette)
+    {
         mouette.OnHit += RemoveAttacker;
         attackers.Add(mouette);
     }
-    
-    void RemoveAttacker(MouetteScript mouette){
+
+    void RemoveAttacker(MouetteScript mouette)
+    {
         attackers.Remove(mouette);
     }
-    
-    public float GetCurrentSpeed(){
+
+    public float GetCurrentSpeed()
+    {
         return speed * direction;
     }
 
     public void Hit(float damage = 10.0f)
     {
         Debug.Log("Boat Hit");
+        if (health < 0) return;
         health -= damage;
         if (health < 0)
         {
-            foreach(var mouette in attackers){
+            foreach (var mouette in attackers)
+            {
                 mouette.RemoveFromBoat();
                 mouette.OnHit -= RemoveAttacker;
             }
             BoatManager.Instance.DestroyBoat(this);
             StartCoroutine(Sink());
+            AudioManager.Instance.PlayClip("Sink");
         }
 
-        GetComponent<SpriteRenderer>().color = Color.Lerp(Color.grey, Color.white, 1.0f * health / maxHealth);
+        sprite.color = Color.Lerp(Color.grey, Color.white, 1.0f * health / maxHealth);
     }
 
-    public void BombHit(float damage = 10.0f){
+    public void BombHit(float damage = 10.0f)
+    {
 
     }
 
@@ -82,21 +92,18 @@ public class Boat : MonoBehaviour, IHitComp
     {
         if (direction < 0)
         {
-            for (float i = 0; i < 90; i += Time.deltaTime)
-            {
-                transform.localEulerAngles = new Vector3(0, 0, i);
-                transform.position += Vector3.down * i * Time.deltaTime;
-                yield return new WaitForEndOfFrame();
-            }
+            GetComponent<Animator>().SetTrigger("ReversePlouf");
+            yield return new WaitForSeconds(.2f);
         }
         else
         {
-            for (float i = 0; i < 90; i += Time.deltaTime)
-            {
-                transform.localEulerAngles = new Vector3(0, 0, -i);
-                transform.position += Vector3.down * -i * Time.deltaTime;
-                yield return new WaitForEndOfFrame();
-            }
+            GetComponent<Animator>().SetTrigger("Plouf");
+        }
+        yield return new WaitForSeconds(.2f);
+        for (float i = -2.32f; i < 0; i += Time.deltaTime)
+        {
+            transform.position += Vector3.down * Time.deltaTime;
+            yield return new WaitForEndOfFrame();
         }
         Destroy(gameObject);
     }

@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4380b2d5a06e583499e03254e430cc96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boat: {fileID: 6335027756147976444, guid: 8cc141a422082ff479d272ece3f36279, type: 3}
+  boat: {fileID: 5317296934042281265, guid: 8cc141a422082ff479d272ece3f36279, type: 3}
   spawn: 1
   range: {x: 2, y: 10}
   boatLeft: 3
