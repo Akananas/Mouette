@@ -28,6 +28,7 @@ public class ScoreManager : MonoBehaviour
             boatCurrent = 0;
             goalBoat *= 2;
             UIManager.Instance.ScoreBoat(0, goalBoat);
+            BoatManager.Instance.MoreBoat();
             shooter.Upgrade();
             return true;
         }
