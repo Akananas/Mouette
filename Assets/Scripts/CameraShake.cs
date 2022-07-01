@@ -14,6 +14,10 @@ public class CameraShake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!GameManager.Inst.IsPlaying){
+            return;
+        }
+
         if (shakeTimer > 0)
         {
             transform.localPosition = basePos + Random.insideUnitSphere * shakeMagnitude;
@@ -29,5 +33,9 @@ public class CameraShake : MonoBehaviour
 
     public void StartShaking(float newTime){
         shakeTimer = newTime;
+    }
+
+    public void ResetShake(){
+        shakeTimer = 0.0f;
     }
 }

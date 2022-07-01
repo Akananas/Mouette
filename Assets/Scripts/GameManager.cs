@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void StartPlaying(){
+        CamShaker.ResetShake();
         IsPlaying = true;
     }
     

@@ -43,12 +43,14 @@ public class ScoreManager : MonoBehaviour
 
     public void Endgame()
     {
+        GameManager.Inst.IsPlaying = false;
         UIManager.Instance.EndScore(boatCount, seagullsCount);
     }
 
     public void Reset()
     {
         boatCurrent = 0;
+        seagullsCount = 0;
         goalBoat = 5;
         UIManager.Instance.ScoreBoat(boatCurrent, goalBoat);
     }

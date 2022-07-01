@@ -157,6 +157,10 @@ public class MouetteScript : MonoBehaviour, IHitComp
         }
     }
     public void Hit(float damage = 10.0f){
+        if(m_MouetteState == MouetteState.Hitted){
+            return;
+        }
+
         Debug.Log("Mouette hit");
         Instantiate(hitFX, transform.position + Vector3.back, Quaternion.identity);
         ScoreManager.Instance.ScoreSeagull();
