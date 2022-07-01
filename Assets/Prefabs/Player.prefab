@@ -139,6 +139,30 @@ MonoBehaviour:
   m_BaseFireRate: 0.2
   m_ProjectileSpawnPoint: {fileID: 6416723212638020989}
   m_ProjectilePrefab: {fileID: 1057691681622549663, guid: 67b1ec22df3a5fb4091062a63ae8c3ed, type: 3}
+  m_FireRateMultiplierCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0.6653485
+      outSlope: 0.6653485
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.0685654
+    - serializedVersion: 3
+      time: 10
+      value: 5
+      inSlope: -0.068408795
+      outSlope: -0.068408795
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10864983
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &1916214568
 Animator:
   serializedVersion: 4

@@ -17,6 +17,8 @@ public class ShooterScript : MonoBehaviour
     ProjectileScript m_CurrentProjectile;
     [SerializeField]Transform m_ProjectileSpawnPoint;
     [SerializeField]GameObject m_ProjectilePrefab;
+    [SerializeField]AnimationCurve m_FireRateMultiplierCurve;
+    int m_UpgradeLevel;
 
     Animator animator;
     
@@ -24,7 +26,7 @@ public class ShooterScript : MonoBehaviour
         m_CanShoot = true;
         m_UseBomb = false;
         m_CurrentShoot = BasicShoot;
-        m_FireRateMultiplier = 1.0f;
+        m_FireRateMultiplier = m_FireRateMultiplierCurve.Evaluate(0);
         animator = GetComponent<Animator>();
         Reload();
     }
@@ -64,7 +66,7 @@ public class ShooterScript : MonoBehaviour
         AudioManager.Instance.PlayClip("Shoot");
         GameManager.Inst.CamShaker.StartShaking(0.25f);
         m_CurrentProjectile?.Launch(position, shootForce, BasicShootHitDetection);
-        m_ReloadTimer = GameManager.Inst?.AddTimer(Reload, m_BaseFireRate * m_FireRateMultiplier);
+        m_ReloadTimer = GameManager.Inst?.AddTimer(Reload, m_BaseFireRate / m_FireRateMultiplier);
     }
 
     void BasicShootHitDetection(Vector2 position){
@@ -76,7 +78,7 @@ public class ShooterScript : MonoBehaviour
 
     void BombShoot(Vector2 position){
         m_CurrentProjectile?.Launch(position, 60.0f, BombShootHitDetection);
-        m_ReloadTimer = GameManager.Inst?.AddTimer(Reload, m_BaseFireRate * m_FireRateMultiplier);
+        m_ReloadTimer = GameManager.Inst?.AddTimer(Reload, m_BaseFireRate / m_FireRateMultiplier);
         m_UseBomb = false;
         m_CurrentShoot = BasicShoot;
     }
@@ -102,7 +104,8 @@ public class ShooterScript : MonoBehaviour
 
     public void Upgrade()
     {
-        m_FireRateMultiplier *= 2.0f;
+        m_UpgradeLevel++;
+        m_FireRateMultiplier = m_FireRateMultiplierCurve.Evaluate(m_UpgradeLevel);
         shootForce *= 2.5f;
     }
 }
