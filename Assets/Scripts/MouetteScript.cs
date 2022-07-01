@@ -24,15 +24,18 @@ public class MouetteScript : MonoBehaviour, IHitComp
     [SerializeField] ParticleSystem hitFX;
     [SerializeField] ParticleSystem fallingFX;
     [SerializeField] SpriteRenderer m_MouetteSprite;
+    Animator m_Anim;
     
     void Start(){
         if(m_NextPoint == null){
             m_NextPoint = new Vector2(10, 0);
         }
+        m_Anim = GetComponent<Animator>();
         m_MouetteTransform = transform;
         m_Speed = m_BaseSpeed;
         CalculateDirection();
         m_MouetteState = MouetteState.LookingForBoat;
+        
 
         GameManager.Inst.AddTimer(() => { this.m_CanChase = true; }, 2.5f);
     }
@@ -62,7 +65,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
                 break;
             case MouetteState.Hitted:
                 if(!Movement()){
-                    Death();
+                    //Death();
                 }
                 break;
         }
@@ -166,12 +169,16 @@ public class MouetteScript : MonoBehaviour, IHitComp
         GameObject go = Instantiate(fallingFX, transform).gameObject;
         go.transform.localPosition = Vector3.zero;
 
+        m_Anim.SetTrigger("Hitted");
         ScoreManager.Instance.ScoreSeagull();
         AudioManager.Instance.PlayClip("Hit");
         m_MouetteState = MouetteState.Hitted;
         m_Path.Clear();
         m_NextPoint = new Vector2(m_MouetteTransform.position.x, -3);
-        CalculateDirection();
+
+        m_MouetteSprite.flipX = m_MouetteSprite.flipY;
+        m_MouetteSprite.flipY = false;
+        m_MouetteTransform.rotation = Quaternion.identity;
         OnHit?.Invoke(this);
     }
 
@@ -182,7 +189,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
             return;
         }
         AudioManager.Instance.PlayClip("Plouf");
-        GetComponent<Animator>().SetTrigger("Plouf");
+        m_Anim.SetTrigger("Plouf");
         m_MouetteTransform.rotation = Quaternion.identity;
         Death(1.0f);
     }
@@ -201,6 +208,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
 
     void Death(float delayBeforeDeath = 0.0f){
         OnDeath?.Invoke(this);
+        m_NextPoint = m_MouetteTransform.position;
         Destroy(this.gameObject, delayBeforeDeath);
     }
 
