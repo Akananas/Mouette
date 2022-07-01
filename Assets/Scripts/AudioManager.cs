@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour
             AudioSource source = gameObject.AddComponent<AudioSource>();
             source.loop = sounds[i].loop;
             source.playOnAwake = false;
-            source.volume = 1;
+            source.volume = sounds[i].volume;
             source.pitch = 1;
             source.clip = sounds[i].clip;
             sounds[i].source = source;
@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    void PlayClip(string name)
+    public void PlayClip(string name)
     {
         Sound s = Array.Find<Sound>(sounds, s => s.name == name);
         s.source.Play();
@@ -42,12 +42,14 @@ public struct Sound
     public AudioClip clip;
     public bool loop;
     public string name;
+    public float volume;
     [HideInInspector] public AudioSource source;
 
-    public Sound(AudioClip clip, AudioSource source, bool loop, string name)
+    public Sound(AudioClip clip, AudioSource source, float volume, bool loop, string name)
     {
         this.clip = clip;
         this.source = source;
+        this.volume = volume;
         this.loop = loop;
         this.name = name;
     }

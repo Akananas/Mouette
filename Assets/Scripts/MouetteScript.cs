@@ -20,6 +20,8 @@ public class MouetteScript : MonoBehaviour, IHitComp
     public Action<MouetteScript> OnHit { get; set; }
     public Action<MouetteScript> OnDeath { get; set; }
     bool m_CanChase;
+    [SerializeField] ParticleSystem hitFX;
+    [SerializeField] ParticleSystem fallingFX;
     
     void Start(){
         if(m_NextPoint == null){
@@ -147,12 +149,20 @@ public class MouetteScript : MonoBehaviour, IHitComp
     }
     public void Hit(float damage = 10.0f){
         Debug.Log("Mouette hit");
+        Instantiate(hitFX, transform.position + Vector3.back, Quaternion.identity);
         ScoreManager.Instance.ScoreSeagull();
         m_MouetteState = MouetteState.Hitted;
         m_Path.Clear();
         m_NextPoint = new Vector2(m_MouetteTransform.position.x, -3);
         CalculateDirection();
         OnHit?.Invoke(this);
+    }
+
+    public void Plouf()
+    {
+        AudioManager.Instance.PlayClip("Plouf");
+        GetComponent<Animator>().SetTrigger("Plouf");
+        Destroy(gameObject, 1);
     }
 
     public void BombHit(float damage = 10.0f){

@@ -61,6 +61,7 @@ public class ShooterScript : MonoBehaviour
     {
         animator.SetBool("CanShoot", false);
         animator.SetTrigger("Shoot");
+        AudioManager.Instance.PlayClip("Shoot");
         GameManager.Inst.CamShaker.StartShaking(0.25f);
         m_CurrentProjectile?.Launch(position, shootForce, BasicShootHitDetection);
         m_ReloadTimer = GameManager.Inst?.AddTimer(Reload, m_BaseFireRate * m_FireRateMultiplier);

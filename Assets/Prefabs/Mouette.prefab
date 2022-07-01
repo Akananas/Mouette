@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5846641776052477714}
   - component: {fileID: 5846641776052477716}
   - component: {fileID: 15337143}
+  - component: {fileID: 7555728904903196551}
   m_Layer: 0
   m_Name: Mouette
   m_TagString: Untagged
@@ -99,7 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9584036fffca4dc498242ad87182c035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PathStep: 10
   m_ChasingPath:
     serializedVersion: 2
     m_Curve:
@@ -133,6 +133,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  hitFX: {fileID: 8979386886987900155, guid: 409681ebfee6b36479852b683a5b708a, type: 3}
+  fallingFX: {fileID: 0}
 --- !u!50 &15337143
 Rigidbody2D:
   serializedVersion: 4
@@ -154,6 +156,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &7555728904903196551
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5846641776052477712}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6198700510880749303
 GameObject:
   m_ObjectHideFlags: 0
