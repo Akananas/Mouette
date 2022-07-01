@@ -6,10 +6,12 @@ public class Mer : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        MouetteScript mouette = collision.attachedRigidbody.gameObject.GetComponent<MouetteScript>();
-        if (mouette)
-        {
-            mouette.Plouf();
+        if(collision.CompareTag("Mouette")){
+            MouetteScript mouette = collision.gameObject.GetComponentInParent<MouetteScript>();
+            if (mouette)
+            {
+                mouette.Plouf();
+            }
         }
     }
 }
