@@ -82,4 +82,10 @@ public class BoatManager : MonoBehaviour
         EnableSpawning(true);
     }
 
+
+    public void MoreBoat()
+    {
+        boatLeft += 5;
+        UIManager.Instance.BoatLeft(boatLeft);
+    }
 }
