@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text boatLeft;
     [SerializeField] private Text endScoreBoat;
     [SerializeField] private Text endScoreSeagull;
+    [SerializeField] float m_RotationSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,7 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         cursor.rectTransform.position = Input.mousePosition;
+        cursor.rectTransform.Rotate(new Vector3(0,0,m_RotationSpeed * Time.deltaTime));
     }
 
     #region UIStates

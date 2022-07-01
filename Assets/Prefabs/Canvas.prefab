@@ -2136,3 +2136,4 @@ MonoBehaviour:
   boatLeft: {fileID: 8824592997886717334}
   endScoreBoat: {fileID: 4318975640284403279}
   endScoreSeagull: {fileID: 3642969237049228765}
+  m_RotationSpeed: 50

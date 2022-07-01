@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     List<Timer> m_Timers = new List<Timer>();
     public bool IsPlaying {get; set;}
     public CameraShake CamShaker {get; private set;}
+
+    public Action OnRestart;
     
     void Awake(){
         if (Inst == null){
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
     public void StartPlaying(){
         CamShaker.ResetShake();
         IsPlaying = true;
+        OnRestart();
     }
     
     void Update(){

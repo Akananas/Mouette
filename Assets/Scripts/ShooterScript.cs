@@ -26,8 +26,8 @@ public class ShooterScript : MonoBehaviour
         m_CanShoot = true;
         m_UseBomb = false;
         m_CurrentShoot = BasicShoot;
-        m_FireRateMultiplier = m_FireRateMultiplierCurve.Evaluate(0);
         animator = GetComponent<Animator>();
+        GameManager.Inst.OnRestart += Restart; 
         Reload();
     }
     
@@ -100,6 +100,11 @@ public class ShooterScript : MonoBehaviour
         m_CanShoot = true;
         animator.SetBool("CanShoot", true);
         m_CurrentProjectile = Instantiate(m_ProjectilePrefab, m_ProjectileSpawnPoint.position, Quaternion.identity).GetComponent<ProjectileScript>();
+    }
+
+    void Restart(){
+        m_UpgradeLevel = 0;
+        m_FireRateMultiplier = m_FireRateMultiplierCurve.Evaluate(0);
     }
 
     public void Upgrade()
