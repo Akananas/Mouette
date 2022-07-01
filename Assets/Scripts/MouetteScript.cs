@@ -163,6 +163,9 @@ public class MouetteScript : MonoBehaviour, IHitComp
 
         Debug.Log("Mouette hit");
         Instantiate(hitFX, transform.position + Vector3.back, Quaternion.identity);
+        GameObject go = Instantiate(fallingFX, transform).gameObject;
+        go.transform.localPosition = Vector3.zero;
+
         ScoreManager.Instance.ScoreSeagull();
         AudioManager.Instance.PlayClip("Hit");
         m_MouetteState = MouetteState.Hitted;
