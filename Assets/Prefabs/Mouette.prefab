@@ -134,6 +134,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  m_BaseSpeed: 1
+  m_ChasingSpeed: 2
   hitFX: {fileID: 8979386886987900155, guid: 409681ebfee6b36479852b683a5b708a, type: 3}
   fallingFX: {fileID: 1789048797482345431, guid: 3fee6c93f22ec32429ba98483f25fbf1, type: 3}
   m_MouetteSprite: {fileID: 5846641776052477714}

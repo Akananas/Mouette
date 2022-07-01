@@ -17,6 +17,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
     Transform m_MouetteTransform;
     Transform m_Target;
     float m_Speed;
+    [SerializeField]float m_BaseSpeed, m_ChasingSpeed;
     public Action<MouetteScript> OnHit { get; set; }
     public Action<MouetteScript> OnDeath { get; set; }
     bool m_CanChase;
@@ -29,7 +30,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
             m_NextPoint = new Vector2(10, 0);
         }
         m_MouetteTransform = transform;
-        m_Speed = 1;
+        m_Speed = m_BaseSpeed;
         CalculateDirection();
         m_MouetteState = MouetteState.LookingForBoat;
 
@@ -127,7 +128,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
         }
         
         m_NextPoint = m_Path.Dequeue();
-        m_Speed = 2;
+        m_Speed = m_ChasingSpeed;
         CalculateDirection();
         
         m_MouetteState = MouetteState.Chasing;
@@ -159,6 +160,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
         Debug.Log("Mouette hit");
         Instantiate(hitFX, transform.position + Vector3.back, Quaternion.identity);
         ScoreManager.Instance.ScoreSeagull();
+        AudioManager.Instance.PlayClip("Hit");
         m_MouetteState = MouetteState.Hitted;
         m_Path.Clear();
         m_NextPoint = new Vector2(m_MouetteTransform.position.x, -3);
@@ -197,6 +199,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
 
     void ResetLooking(){
         m_Target = null;
+        m_Speed = m_BaseSpeed;
         m_MouetteState = MouetteState.LookingForBoat;
         m_NextPoint = RandomPointOutsideScreen();
         CalculateDirection();
