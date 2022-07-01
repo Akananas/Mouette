@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - MouetteTarget
+  - Mouette
   layers:
   - Default
   - TransparentFX
