@@ -46,3 +46,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 5846641776052477712, guid: 9f190433f75aef8448b690c6c672d88d, type: 3}
   spawnRate: {x: 0.5, y: 1.5}
+  spawnRateCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 1.1038983
+      outSlope: 1.1038983
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.24933274
+    - serializedVersion: 3
+      time: 20
+      value: 10
+      inSlope: 0.7661335
+      outSlope: 0.7661335
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.31707364
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

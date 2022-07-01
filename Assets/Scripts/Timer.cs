@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class Timer
 {
@@ -7,19 +8,24 @@ public class Timer
     float m_CurrentTime;
     bool m_Looping;
     bool m_ConstantLooping;
+    bool m_Paused;
     int m_LoopingTime;
     
     //0 or negative loop time amount for infinite timer
-    public Timer(Action endTimer, float time, bool looping = false, int loopingTime = 1){
+    public Timer(Action endTimer, float time, bool looping = false, int loopingTime = 1, bool startPaused = false){
         m_EndTimer = endTimer;
         m_Time = time;
         m_CurrentTime = 0.0f;
         m_Looping = looping;
         m_LoopingTime = loopingTime;
         m_ConstantLooping = m_Looping && m_LoopingTime <= 0;
+        m_Paused = startPaused;
     }
     
     public bool Update(float deltaTime){    
+        if(m_Paused){
+            return false;
+        }
         m_CurrentTime += deltaTime;
         if(m_CurrentTime >= m_Time){
             m_EndTimer?.Invoke();
@@ -53,10 +59,19 @@ public class Timer
         return m_Time - m_CurrentTime;
     }
     
-    public void ForceStop(bool keepActive){
+    public void ForceStop(bool doAnotherTick){
         m_CurrentTime = m_Time;
-        if(!keepActive){
-            m_EndTimer -= m_EndTimer;
+        m_Looping = false;
+        if(!doAnotherTick){
+            m_EndTimer = null;
         }
+    }
+    
+    public void ResetTime(){
+        m_CurrentTime = 0;
+    }
+
+    public void SetPauseValue(bool pause){
+        m_Paused = pause;
     }
 }
