@@ -44,7 +44,6 @@ public class BoatManager : MonoBehaviour
         {
             Boat boat = Instantiate(this.boat, new Vector3(10, depth, 0), Quaternion.identity);
             boat.direction = -1;
-            boat.GetComponent<SpriteRenderer>().flipX = true;
             go = boat.gameObject;
         }
         go.transform.localScale = Vector3.Lerp(Vector3.one * .5f, Vector3.one, -(depth + 1.2f));
