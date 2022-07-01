@@ -45,7 +45,7 @@ public class Boat : MonoBehaviour, IHitComp
     }
     
     public void AddAttacker(MouetteScript mouette){
-        mouette.OnHit = RemoveAttacker;
+        mouette.OnHit += RemoveAttacker;
         attackers.Add(mouette);
     }
     

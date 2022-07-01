@@ -10,7 +10,17 @@ public class Mer : MonoBehaviour
             MouetteScript mouette = collision.gameObject.GetComponentInParent<MouetteScript>();
             if (mouette)
             {
-                mouette.Plouf();
+                mouette.Plouf(mouette);
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D col){
+        if(col.CompareTag("Mouette")){
+            MouetteScript mouette = col.gameObject.GetComponentInParent<MouetteScript>();
+            if (mouette)
+            {
+                mouette.RemovePlouf();
             }
         }
     }

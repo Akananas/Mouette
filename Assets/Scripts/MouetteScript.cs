@@ -166,11 +166,20 @@ public class MouetteScript : MonoBehaviour, IHitComp
         OnHit?.Invoke(this);
     }
 
-    public void Plouf()
+    public void Plouf(MouetteScript mouette)
     {
+        if(m_MouetteState != MouetteState.Hitted){
+            OnHit += Plouf;
+            return;
+        }
         AudioManager.Instance.PlayClip("Plouf");
         GetComponent<Animator>().SetTrigger("Plouf");
+        m_MouetteTransform.rotation = Quaternion.identity;
         Death(1.0f);
+    }
+
+    public void RemovePlouf(){
+        OnHit -= Plouf;
     }
 
     public void BombHit(float damage = 10.0f){
@@ -190,6 +199,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
         m_Target = null;
         m_MouetteState = MouetteState.LookingForBoat;
         m_NextPoint = RandomPointOutsideScreen();
+        CalculateDirection();
     }
     
     Vector2 RandomPointOutsideScreen(){
