@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7555728904903196551}
   m_Layer: 0
   m_Name: Mouette
-  m_TagString: Untagged
+  m_TagString: Mouette
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,6 +136,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   hitFX: {fileID: 8979386886987900155, guid: 409681ebfee6b36479852b683a5b708a, type: 3}
   fallingFX: {fileID: 1789048797482345431, guid: 3fee6c93f22ec32429ba98483f25fbf1, type: 3}
+  m_MouetteSprite: {fileID: 5846641776052477714}
 --- !u!50 &15337143
 Rigidbody2D:
   serializedVersion: 4
@@ -189,7 +190,7 @@ GameObject:
   - component: {fileID: 5200198268086873696}
   m_Layer: 7
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Mouette
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

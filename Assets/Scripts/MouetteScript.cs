@@ -22,6 +22,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
     bool m_CanChase;
     [SerializeField] ParticleSystem hitFX;
     [SerializeField] ParticleSystem fallingFX;
+    [SerializeField] SpriteRenderer m_MouetteSprite;
     
     void Start(){
         if(m_NextPoint == null){
@@ -92,6 +93,12 @@ public class MouetteScript : MonoBehaviour, IHitComp
 
         return true;
     }
+
+    void Rotation(){
+        float angle = Mathf.Atan2(m_Dir.y, m_Dir.x) * 180 / Mathf.PI;
+        m_MouetteSprite.flipY = angle < -90 || angle > 90;
+        m_MouetteTransform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
     
     bool LookingForTarget(){
         if(m_CanChase && m_Target){
@@ -130,6 +137,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
     void CalculateDirection(){
         m_Dir = ((Vector3)m_NextPoint - m_MouetteTransform.position).normalized;
         m_MouetteTransform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(m_Dir.x, m_Dir.y));
+        Rotation();
     }
 
     public void SetNextPoint(Vector2 val){
@@ -162,7 +170,7 @@ public class MouetteScript : MonoBehaviour, IHitComp
     {
         AudioManager.Instance.PlayClip("Plouf");
         GetComponent<Animator>().SetTrigger("Plouf");
-        Death();
+        Death(1.0f);
     }
 
     public void BombHit(float damage = 10.0f){
@@ -173,9 +181,9 @@ public class MouetteScript : MonoBehaviour, IHitComp
         ResetLooking();
     }
 
-    void Death(){
+    void Death(float delayBeforeDeath = 0.0f){
         OnDeath?.Invoke(this);
-        Destroy(this.gameObject);
+        Destroy(this.gameObject, delayBeforeDeath);
     }
 
     void ResetLooking(){
