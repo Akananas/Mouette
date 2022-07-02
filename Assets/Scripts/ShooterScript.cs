@@ -113,6 +113,6 @@ public class ShooterScript : MonoBehaviour
     {
         m_UpgradeLevel++;
         m_FireRateMultiplier = m_FireRateMultiplierCurve.Evaluate(m_UpgradeLevel);
-        currentShootForce *= 2.5f;
+        currentShootForce *= 1.3f;
     }
 }

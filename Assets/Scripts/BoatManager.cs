@@ -85,7 +85,7 @@ public class BoatManager : MonoBehaviour
 
     public void MoreBoat()
     {
-        boatLeft += 5;
+        boatLeft += 3;
         UIManager.Instance.BoatLeft(boatLeft);
     }
 }
