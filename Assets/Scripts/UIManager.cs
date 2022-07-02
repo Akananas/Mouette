@@ -104,7 +104,7 @@ public class UIManager : MonoBehaviour
 
     public void EndScore(int boats, int seagulls)
     {
-        endScoreBoat.text = "Youo saved " + boats + "boats";
-        endScoreSeagull.text = "and fed " + seagulls + "seagulls!";
+        endScoreBoat.text = "You saved " + boats + " boats";
+        endScoreSeagull.text = "and fed " + seagulls + " seagulls!";
     }
 }

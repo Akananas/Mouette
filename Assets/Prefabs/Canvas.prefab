@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6784128046472948213}
   - component: {fileID: 3213490439319637035}
   - component: {fileID: 3642969237049228765}
+  - component: {fileID: 9116196986178672471}
   m_Layer: 5
   m_Name: EndSeagullScore
   m_TagString: Untagged
@@ -80,6 +81,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: and fed ??? seagulls
+--- !u!114 &9116196986178672471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3185750572549828560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &4499860059829712980
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,6 +107,7 @@ GameObject:
   - component: {fileID: 2106851346140319855}
   - component: {fileID: 3049274550654689930}
   - component: {fileID: 4318975640284403279}
+  - component: {fileID: 2166375468636206565}
   m_Layer: 5
   m_Name: EndBoatScore
   m_TagString: Untagged
@@ -160,6 +177,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: You saved ?? boats
+--- !u!114 &2166375468636206565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4499860059829712980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &8824592997489708946
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,7 +263,7 @@ RectTransform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8824592999095852590}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -686,6 +718,7 @@ GameObject:
   - component: {fileID: 8824592997659845787}
   - component: {fileID: 8824592997659845785}
   - component: {fileID: 8824592997659845784}
+  - component: {fileID: 3686778272679901924}
   m_Layer: 5
   m_Name: scoreBoat
   m_TagString: Untagged
@@ -756,6 +789,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 0 / 100
+--- !u!114 &3686778272679901924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8824592997659845786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &8824592997678242012
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,6 +986,7 @@ GameObject:
   - component: {fileID: 8824592997812892245}
   - component: {fileID: 8824592997812892243}
   - component: {fileID: 8824592997812892242}
+  - component: {fileID: 2603593431115313955}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -1007,6 +1056,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Pause
+--- !u!114 &2603593431115313955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8824592997812892244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &8824592997882924100
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,6 +1215,7 @@ GameObject:
   - component: {fileID: 8824592997886717332}
   - component: {fileID: 8824592997886717335}
   - component: {fileID: 8824592997886717334}
+  - component: {fileID: 2260773969424391938}
   m_Layer: 5
   m_Name: boatLeft
   m_TagString: Untagged
@@ -1221,6 +1286,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 0 / 100
+--- !u!114 &2260773969424391938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8824592997886717337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &8824592997960492421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1597,7 +1677,7 @@ RectTransform:
   - {fileID: 2106851346140319855}
   - {fileID: 6784128046472948213}
   m_Father: {fileID: 8824592999095852590}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1788,6 +1868,7 @@ GameObject:
   - component: {fileID: 8824592998651288913}
   - component: {fileID: 8824592998651288911}
   - component: {fileID: 8824592998651288910}
+  - component: {fileID: 2502977161676724125}
   m_Layer: 5
   m_Name: DefeatText
   m_TagString: Untagged
@@ -1856,7 +1937,22 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: T'AS PERDU!
+  m_Text: YOU LOST!
+--- !u!114 &2502977161676724125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8824592998651288912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &8824592998934625380
 GameObject:
   m_ObjectHideFlags: 0
@@ -2044,8 +2140,8 @@ RectTransform:
   - {fileID: 8824592998516578197}
   - {fileID: 8824592997678242013}
   - {fileID: 8824592997489708947}
-  - {fileID: 8824592997496220366}
   - {fileID: 8824592998367762003}
+  - {fileID: 8824592997496220366}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -7,6 +7,7 @@ public class ShooterScript : MonoBehaviour
     bool m_CanShoot;
     bool m_UseBomb;
     public float shootForce = 50.0f;
+    float currentShootForce;
     [SerializeField]float m_Radius;
     [SerializeField]float m_BombRadius;
     [SerializeField]LayerMask m_HittableObjects;
@@ -65,7 +66,7 @@ public class ShooterScript : MonoBehaviour
         animator.SetTrigger("Shoot");
         AudioManager.Instance.PlayClip("Shoot");
         GameManager.Inst.CamShaker.StartShaking(0.25f);
-        m_CurrentProjectile?.Launch(position, shootForce, BasicShootHitDetection);
+        m_CurrentProjectile?.Launch(position, currentShootForce, BasicShootHitDetection);
         m_ReloadTimer = GameManager.Inst?.AddTimer(Reload, m_BaseFireRate / m_FireRateMultiplier);
     }
 
@@ -77,7 +78,7 @@ public class ShooterScript : MonoBehaviour
     }
 
     void BombShoot(Vector2 position){
-        m_CurrentProjectile?.Launch(position, 60.0f, BombShootHitDetection);
+        m_CurrentProjectile?.Launch(position, currentShootForce, BombShootHitDetection);
         m_ReloadTimer = GameManager.Inst?.AddTimer(Reload, m_BaseFireRate / m_FireRateMultiplier);
         m_UseBomb = false;
         m_CurrentShoot = BasicShoot;
@@ -105,12 +106,13 @@ public class ShooterScript : MonoBehaviour
     void Restart(){
         m_UpgradeLevel = 0;
         m_FireRateMultiplier = m_FireRateMultiplierCurve.Evaluate(0);
+        currentShootForce = shootForce;
     }
 
     public void Upgrade()
     {
         m_UpgradeLevel++;
         m_FireRateMultiplier = m_FireRateMultiplierCurve.Evaluate(m_UpgradeLevel);
-        shootForce *= 2.5f;
+        currentShootForce *= 2.5f;
     }
 }

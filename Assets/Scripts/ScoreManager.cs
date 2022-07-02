@@ -51,6 +51,7 @@ public class ScoreManager : MonoBehaviour
     public void Reset()
     {
         boatCurrent = 0;
+        boatCount = 0;
         seagullsCount = 0;
         goalBoat = 5;
         UIManager.Instance.ScoreBoat(boatCurrent, goalBoat);

@@ -1000,6 +1000,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3108727968341784861, guid: 871c22c7e6c2b5a4e8e1b0aea8f7dc13, type: 3}
+      propertyPath: spawnRateCurve.m_Curve.Array.data[0].inSlope
+      value: 0.5166755
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108727968341784861, guid: 871c22c7e6c2b5a4e8e1b0aea8f7dc13, type: 3}
+      propertyPath: spawnRateCurve.m_Curve.Array.data[0].outSlope
+      value: 0.5166755
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108727968341784861, guid: 871c22c7e6c2b5a4e8e1b0aea8f7dc13, type: 3}
+      propertyPath: spawnRateCurve.m_Curve.Array.data[0].outWeight
+      value: 0.17668775
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 871c22c7e6c2b5a4e8e1b0aea8f7dc13, type: 3}
 --- !u!1001 &1283654571
@@ -1032,6 +1044,10 @@ PrefabInstance:
     - target: {fileID: 7500743437887914665, guid: e52bc93d50549fb4aaad5467eb068552, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500743437887914665, guid: e52bc93d50549fb4aaad5467eb068552, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7500743437887914665, guid: e52bc93d50549fb4aaad5467eb068552, type: 3}
       propertyPath: m_SpriteSortPoint
