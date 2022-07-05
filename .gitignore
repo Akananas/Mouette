@@ -71,3 +71,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 .vsconfig
+
+# Jetbrain Rider Cache
+.idea/
+Assets/Plugins/Editor/JetBrains*
