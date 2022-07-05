@@ -46,6 +46,13 @@ public class ScoreManager : MonoBehaviour
     {
         GameManager.Inst.IsPlaying = false;
         UIManager.Instance.EndScore(boatCount, seagullsCount);
+        if (boatCount + seagullsCount > PlayerPrefs.GetInt("BoatHS", 0) + PlayerPrefs.GetInt("SeagullHS", 0))
+        {
+            PlayerPrefs.SetInt("BoatHS", boatCount);
+            PlayerPrefs.SetInt("SeagullHS", seagullsCount);
+            //New high score
+        }
+        //Show high score
     }
 
     public void Reset()

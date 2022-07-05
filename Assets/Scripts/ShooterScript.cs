@@ -6,6 +6,7 @@ public class ShooterScript : MonoBehaviour
 {
     bool m_CanShoot;
     bool m_UseBomb;
+    int m_BombAvailable;
     public float shootForce = 50.0f;
     float currentShootForce;
     [SerializeField]float m_Radius;
@@ -23,7 +24,9 @@ public class ShooterScript : MonoBehaviour
 
     Animator animator;
     
-    void Start(){
+    void Start()
+    {
+        m_BombAvailable = 0;
         m_CanShoot = true;
         m_UseBomb = false;
         m_CurrentShoot = BasicShoot;

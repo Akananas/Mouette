@@ -87,7 +87,9 @@ public class UIManager : MonoBehaviour
 
     public void QuitButton()
     {
-        Application.Quit();
+        #if !UNITY_WEBGL
+            Application.Quit();
+        #endif
     }
     #endregion
 
